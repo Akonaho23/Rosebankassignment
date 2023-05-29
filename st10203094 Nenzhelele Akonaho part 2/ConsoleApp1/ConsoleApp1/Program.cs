@@ -1,12 +1,39 @@
 ﻿// See https://aka.ms/new-console-template for more information
 using ConsoleApp1;
 using ConsoleApp1.NewFolder;
+using System.Numerics;
 
-
-bool recipeMenu = true;
+//variables 
 int mainOption = 0;
-List<Recipe> recipes;
+List<Recipe> recipes;//list of recipes objects
 
+/*
+ * a function to input a number
+ */
+int enterNumber() {
+    bool isNumber = false;
+    int num = 0;
+    String readNumber = "";
+    while (!isNumber) {
+        readNumber = Console.ReadLine() ?? "";
+        try { 
+           num = int.Parse(readNumber);
+           isNumber= true;
+        } catch
+        {
+            Console.WriteLine(readNumber + " is not a number, please enter a valid number ");
+            isNumber= false;
+        }
+        
+
+    }
+
+    return num;
+}
+
+/*
+ a function to enter recipes
+ */
 List<Recipe> enterRecipes( int size) { 
 
     for(int i = 0;i < size; i++) {
@@ -14,7 +41,7 @@ List<Recipe> enterRecipes( int size) {
         String recipeName = Convert.ToString(Console.ReadLine()) ?? "";
 
         Console.WriteLine("How many ingridients of recipe " + recipeName + "? ");
-        int numIngridients = Convert.ToInt32(Console.ReadLine());
+        int numIngridients = enterNumber();
 
         Recipe obRecip = new Recipe(numIngridients, recipeName);
 
@@ -31,7 +58,9 @@ List<Recipe> enterRecipes( int size) {
     return recipeslist;
 }
 
-
+/*
+ function to display each recipe details
+ */
 void displayRecipe(int index) {
 
     int option = -1;
@@ -99,11 +128,14 @@ void displayRecipe(int index) {
         
         Console.WriteLine("Menu \n1-Add recipe\n2-Display recipe\n3-Update Quantity\n4-Reset\n5-Clear recipe" +
        " Quatnity\nClear \n6-Go to Main Menu recipe\n0-Exit");
-        option = Convert.ToInt32(Console.ReadLine());
+        option = enterNumber();
     }
 
 }
 
+/*
+ function to display all recipes
+ */
 void displayRecipes(List<Recipe> recipes) {
     Console.Clear();    
     Console.WriteLine("Recipe List:");
@@ -119,27 +151,27 @@ void displayRecipes(List<Recipe> recipes) {
 
 
 
-
+//asking the user how many recipes
 Console.WriteLine("How many recipes ?");
-int numRecipes = Convert.ToInt32(Console.ReadLine());
 
-int optionMainMenu = 0;
+int numRecipes =enterNumber();
 
- recipes = new List<Recipe>();
+recipes = new List<Recipe>();
 
 recipes = enterRecipes(numRecipes);
 
-int option = -1;
-
 displayRecipes(recipes);
 
+//asking the user to choose which recipe details to display.
 Console.WriteLine("Enter the number of recipe you want to display or 0 to exit");
+int selectRecipe=enterNumber();
 
-int selectRecipe = Convert.ToInt32(Console.ReadLine());
+
+
 while (selectRecipe < 0 || selectRecipe > (numRecipes+1))
 {
     Console.WriteLine("Please enter the value from " + 1 + " to " + numRecipes);
-    selectRecipe = Convert.ToInt32(Console.ReadLine());
+    selectRecipe = enterNumber();
 }
 Console.Clear();
 mainOption = -2;
@@ -153,11 +185,11 @@ while (mainOption != 0)
             Console.Clear();
             displayRecipes(recipes);
             Console.WriteLine("Enter the number of recipe you want to display 0 to exit");
-            selectRecipe = Convert.ToInt32(Console.ReadLine());
+            selectRecipe = enterNumber();
             while (selectRecipe < 0 || selectRecipe > (numRecipes+1))
             {
                 Console.WriteLine("Please enter the value from " + 1 + " to " + numRecipes);
-                selectRecipe = Convert.ToInt32(Console.ReadLine());
+                selectRecipe = enterNumber();
             }
             Console.Clear();
             mainOption = -2;

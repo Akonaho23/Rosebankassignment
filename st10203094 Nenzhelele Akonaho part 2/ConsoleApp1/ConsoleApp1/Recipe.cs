@@ -29,6 +29,57 @@ namespace ConsoleApp1
         public int getNumSteps() { return numSteps;}
 
         public String GetRecipeName() { return recipeName; }
+        /*
+        * a function to input a number
+        */
+        int enterNumber()
+        {
+            bool isNumber = false;
+            int num = 0;
+            String readNumber = "";
+            while (!isNumber)
+            {
+                readNumber = Console.ReadLine() ?? "";
+                try
+                {
+                    num = int.Parse(readNumber);
+                    isNumber = true;
+                }
+                catch
+                {
+                    Console.WriteLine(readNumber + " is not a number, please enter a valid number ");
+                    isNumber = false;
+                }
+
+
+            }
+
+            return num;
+        }
+
+        decimal enterDecimal() {
+            bool isNumber = false;
+            decimal num = 0;
+            String readNumber = "";
+            while (!isNumber)
+            {
+                readNumber = Console.ReadLine() ?? "";
+                try
+                {
+                    num = decimal.Parse(readNumber);
+                    isNumber = true;
+                }
+                catch
+                {
+                    Console.WriteLine(readNumber + " is not a number, please enter a valid number ");
+                    isNumber = false;
+                }
+
+
+            }
+
+            return num;
+        }
 
         /*
          * this is a function to enter details for each ingridient
@@ -42,13 +93,13 @@ namespace ConsoleApp1
                 String name = Console.ReadLine() ?? "";
 
                 Console.WriteLine("What is the quantity of ingridient " + name + "?");
-                int Quantity = Convert.ToInt32(Console.ReadLine());
+                int Quantity = enterNumber();
 
                 Console.WriteLine("What is the measure of ingridient " + name +"?");
-                decimal measure = Convert.ToDecimal(Console.ReadLine());
+                decimal measure = enterDecimal();
 
                 Console.WriteLine("What is the total calories of " + name + "?");
-                decimal totalCalories = Convert.ToDecimal(Console.ReadLine());
+                decimal totalCalories = enterDecimal();
 
                 Console.WriteLine("What is the food group " + name + "?");
                 String foodGroup = Console.ReadLine() ?? "";
@@ -65,7 +116,7 @@ namespace ConsoleApp1
             }
             Console.WriteLine("How many Steps for " + recipeName + "?");
 
-            int numStepss = Convert.ToInt32(Console.ReadLine());
+            int numStepss = enterNumber();
             enterSteps(numStepss);
             Console.WriteLine("###########################################################################################");
         }
@@ -118,11 +169,11 @@ namespace ConsoleApp1
         {
             Console.WriteLine("What is the factor?");
 
-            int factor = Convert.ToInt32(Console.ReadLine());
+            int factor = enterNumber();
 
             while ((factor) < 0) {
                 Console.WriteLine("Pleae enter a valid factor, it can't be negative");
-                factor = Convert.ToInt32(Console.ReadLine());
+                factor = enterNumber();
             }
             for (int i = 0; i < numIngrdient; i++) {
                 int current = ingridients.ElementAt(i).getQuantity;
